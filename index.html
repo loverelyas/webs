@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>جمع المعلومات</title>
+    <script>
+        function sendUserInfo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const unique_id = window.location.pathname.split("/").pop();
+
+            fetch(`http://your-server.com/collect_info/${unique_id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ip: 'user_ip',
+                    location: 'user_location',
+                    user_agent: navigator.userAgent
+                })
+            })
+            .then(response => response.json())
+            .then(data => console.log('Success:', data))
+            .catch((error) => console.error('Error:', error));
+        }
+
+        window.onload = sendUserInfo;
+    </script>
+</head>
+<body>
+    <h1>جارٍ جمع المعلومات...</h1>
+</body>
+</html>
